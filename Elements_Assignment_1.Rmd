@@ -1,0 +1,427 @@
+---
+title: "Assignement1"
+author: "Zain Mudassar"
+date: "2/18/2021"
+output:
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+```{r Q1}
+library(igraph)
+
+```
+ 
+## Data Loading 
+
+
+```{r Q1(A)}
+Political<- read.graph("polblogs.gml",format=c("gml"))
+Neuralnet<- read.graph("celegansneural.gml",format=c("gml"))
+Internet<- read.graph("as-22july06.gml",format=c("gml"))
+books<-read.graph("polbooks.gml",format=c("gml"))
+```
+
+# Erdos-Renyi random networks G(n; p) using igraph.
+
+```{r Q1(B)}
+first <- erdos.renyi.game(2000, 0.01)
+second <- erdos.renyi.game(2000, 0.005)
+third <- erdos.renyi.game(2000, 0.0025)
+
+```
+
+# Internet:
+
+
+```{r Q1(C)}
+
+Is_Directed <- is_directed(Internet)
+print("Is directed or not")
+Is_Directed
+
+No_Nodes <- gorder(Internet)
+print("Number of Nodes")
+No_Nodes
+
+No_Edges<-gsize(Internet)
+print("Number of Edges ")
+No_Edges
+
+No_Connect_Components=groups(components(Internet,mode = c("weak", "strong")))
+print("Number of connected components")
+
+Max_Degree <-max(degree(Internet))
+print("Maximum Degree ")
+Max_Degree
+
+```
+```{r Q1(D)}
+
+Avg_P_Length<-average.path.length(Internet)
+print("Average Path Length")
+Avg_P_Length
+
+Diameter<-diameter(Internet)
+print("Diameter")
+
+Diameter
+
+
+Avg_L_Cluster_Coefficient<-transitivity(Internet, type = c("localaverageundirected"))
+print("Average Local Clustering Coefficient")
+
+Avg_L_Cluster_Coefficient
+
+
+Avg_G_Cluster_Coefficient<-transitivity(Internet, type = c("global"))
+print("Average global clustering coefficient")
+
+Avg_G_Cluster_Coefficient
+
+
+plot(degree.distribution(Internet),xlab="Pk", ylab="k")
+
+plot(path.length.hist(Internet)$res,xlab="Pl", ylab="l")
+
+
+```
+
+
+
+# Political
+
+```{r Q2(A)}
+Is_Directed <- is_directed(Political)
+print("Is directed or not")
+Is_Directed
+
+No_Nodes <- gorder(Political)
+print("Number of Nodes")
+No_Nodes
+
+No_Edges<-gsize(Political)
+print("Number of Edges ")
+No_Edges
+
+No_Connect_Components=groups(components(Political,mode = c("weak", "strong")))
+print("Number of connected components")
+
+Max_Degree <-max(degree(Political))
+print("Maximum Degree ")
+Max_Degree
+
+```
+
+```{r Q2(B)}
+Avg_P_Length<-average.path.length(Political)
+print("Average Path Length")
+Avg_P_Length
+
+Diameter<-diameter(Political)
+print("Diameter")
+
+Diameter
+
+
+Avg_L_Cluster_Coefficient<-transitivity(Political, type = c("localaverageundirected"))
+print("Average Local Clustering Coefficient")
+
+Avg_L_Cluster_Coefficient
+
+
+Avg_G_Cluster_Coefficient<-transitivity(Political, type = c("global"))
+print("Average global clustering coefficient")
+
+Avg_G_Cluster_Coefficient
+
+
+plot(degree.distribution(Political),xlab="Pk", ylab="k")
+
+plot(path.length.hist(Political)$res,xlab="Pl", ylab="l")
+
+
+```
+
+
+# Neural Network:
+
+```{r Q3(A)}
+Is_Directed <- is_directed(Neuralnet)
+print("Is directed or not")
+Is_Directed
+
+No_Nodes <- gorder(Neuralnet)
+print("Number of Nodes")
+No_Nodes
+
+No_Edges<-gsize(Neuralnet)
+print("Number of Edges ")
+No_Edges
+
+No_Connect_Components=groups(components(Neuralnet,mode = c("weak", "strong")))
+print("Number of connected components")
+No_Connect_Components
+
+Max_Degree <-max(degree(Neuralnet))
+print("Maximum Degree ")
+Max_Degree
+
+```
+
+
+```{r Q3(B)}
+Avg_P_Length<-average.path.length(Neuralnet)
+print("Average Path Length")
+Avg_P_Length
+
+Diameter<-diameter(Neuralnet)
+print("Diameter")
+
+Diameter
+
+
+Avg_L_Cluster_Coefficient<-transitivity(Neuralnet, type = c("localaverageundirected"))
+print("Average Local Clustering Coefficient")
+
+Avg_L_Cluster_Coefficient
+
+
+Avg_G_Cluster_Coefficient<-transitivity(Neuralnet, type = c("global"))
+print("Average global clustering coefficient")
+Avg_G_Cluster_Coefficient
+
+
+plot(degree.distribution(Neuralnet),xlab="Pk", ylab="k")
+
+plot(path.length.hist(Neuralnet)$res,xlab="Pl", ylab="l")
+```
+
+
+
+# Erdos-Renyi random networks (parameters n = 2000 and p = 0:01);
+
+```{r Q4(A)}
+Is_Directed <- is_directed(first)
+print("Is directed or not")
+Is_Directed
+
+No_Nodes <- gorder(first)
+print("Number of Nodes")
+No_Nodes
+
+No_Edges<-gsize(first)
+print("Number of Edges ")
+No_Edges
+
+No_Connect_Components=groups(components(first,mode = c("weak", "strong")))
+print("Number of connected components")
+
+Max_Degree <-max(degree(first))
+print("Maximum Degree ")
+Max_Degree
+
+```
+
+
+```{r Q4(B)}
+Avg_P_Length<-average.path.length(first)
+print("Average Path Length")
+Avg_P_Length
+
+Diameter<-diameter(first)
+print("Diameter")
+
+Diameter
+
+
+Avg_L_Cluster_Coefficient<-transitivity(first, type = c("localaverageundirected"))
+print("Average Local Clustering Coefficient")
+
+Avg_L_Cluster_Coefficient
+
+
+Avg_G_Cluster_Coefficient<-transitivity(first, type = c("global"))
+print("Average global clustering coefficient")
+Avg_G_Cluster_Coefficient
+
+
+plot(degree.distribution(first),xlab="Pk", ylab="k")
+
+plot(path.length.hist(first)$res,xlab="Pl", ylab="l")
+```
+
+
+
+
+# Erdos-Renyi random networks (parameters n = 2000 and p = 0:005);
+
+```{r Q5(A)}
+Is_Directed <- is_directed(second)
+print("Is directed or not")
+Is_Directed
+
+No_Nodes <- gorder(second)
+print("Number of Nodes")
+No_Nodes
+
+No_Edges<-gsize(second)
+print("Number of Edges ")
+No_Edges
+
+No_Connect_Components=groups(components(second,mode = c("weak", "strong")))
+print("Number of connected components")
+
+
+Max_Degree <-max(degree(second))
+print("Maximum Degree ")
+Max_Degree
+
+```
+
+
+```{r Q5(B)}
+Avg_P_Length<-average.path.length(second)
+print("Average Path Length")
+Avg_P_Length
+
+Diameter<-diameter(second)
+print("Diameter")
+
+Diameter
+
+
+Avg_L_Cluster_Coefficient<-transitivity(second, type = c("localaverageundirected"))
+print("Average Local Clustering Coefficient")
+
+Avg_L_Cluster_Coefficient
+
+
+Avg_G_Cluster_Coefficient<-transitivity(second, type = c("global"))
+print("Average global clustering coefficient")
+Avg_G_Cluster_Coefficient
+
+
+plot(degree.distribution(second),xlab="Pk", ylab="k")
+
+plot(path.length.hist(second)$res,xlab="Pl", ylab="l")
+```
+
+
+
+# Erdos-Renyi random networks (parameters n = 2000 and p = 0:0025);
+
+```{r Q6(A)}
+Is_Directed <- is_directed(third)
+print("Is directed or not")
+Is_Directed
+
+No_Nodes <- gorder(third)
+print("Number of Nodes")
+No_Nodes
+
+No_Edges<-gsize(third)
+print("Number of Edges ")
+No_Edges
+
+No_Connect_Components=groups(components(third,mode = c("weak", "strong")))
+print("Number of connected components")
+
+Max_Degree <-max(degree(third))
+print("Maximum Degree ")
+Max_Degree
+
+```
+
+
+```{r Q6(B)}
+Avg_P_Length<-average.path.length(third)
+print("Average Path Length")
+Avg_P_Length
+
+Diameter<-diameter(third)
+print("Diameter")
+
+Diameter
+
+
+Avg_L_Cluster_Coefficient<-transitivity(third, type = c("localaverageundirected"))
+print("Average Local Clustering Coefficient")
+
+Avg_L_Cluster_Coefficient
+
+
+Avg_G_Cluster_Coefficient<-transitivity(third, type = c("global"))
+print("Average global clustering coefficient")
+Avg_G_Cluster_Coefficient
+
+
+plot(degree.distribution(third),xlab="Pk", ylab="k")
+
+plot(path.length.hist(third)$res,xlab="Pl", ylab="l")
+```
+
+# Analysis of "Books of US politics":
+# Description: 
+I have worked on "Books of US politics" dataset. The nodes in the data represent the books about US politics sold by Amazon.com.Edges are representing frequently co-purchased books by the same buyers, as indicated by the "customers who bought this book also bought these other books" feature on Amazon. There are three values given to nodes which are "l" "n" "c", which stands for "liberal", "neutral", or "conservative". 
+
+
+```{r Q7(A)}
+Is_Directed <- is_directed(books)
+print("Is directed or not")
+Is_Directed
+
+No_Nodes <- gorder(books)
+print("Number of Nodes")
+No_Nodes
+
+No_Edges<-gsize(books)
+print("Number of Edges ")
+No_Edges
+
+No_Connect_Components=groups(components(books,mode = c("weak", "strong")))
+print("Number of connected components")
+
+Max_Degree <-max(degree(books))
+print("Maximum Degree ")
+Max_Degree
+
+```
+
+
+```{r Q7(B)}
+Avg_P_Length<-average.path.length(books)
+print("Average Path Length")
+Avg_P_Length
+
+Diameter<-diameter(books)
+print("Diameter")
+
+Diameter
+
+
+Avg_L_Cluster_Coefficient<-transitivity(books, type = c("localaverageundirected"))
+print("Average Local Clustering Coefficient")
+
+Avg_L_Cluster_Coefficient
+
+
+Avg_G_Cluster_Coefficient<-transitivity(books, type = c("global"))
+print("Average global clustering coefficient")
+Avg_G_Cluster_Coefficient
+
+
+plot(degree.distribution(books),xlab="Pk", ylab="k")
+
+plot(path.length.hist(books)$res,xlab="Pl", ylab="l")
+```
+
+
+

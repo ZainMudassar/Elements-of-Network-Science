@@ -1,0 +1,486 @@
+---
+title: "Assignment 2"
+author: "Zain Mudassar"
+date: "3/14/2021"
+output:
+  html_document:
+    df_print: paged
+  word_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+library(igraph)
+```
+
+## Problem 1:
+
+## Forth realWord dataset chosen is Political Books:
+Description:
+In my dataset the Nodes represent  books about US politics sold by the online bookseller Amazon.com.  Edges represent frequent co-purchasing of books by the same buyers, as indicated by the "customers who bought this book also bought these other books" feature on Amazon. Nodes have been given values "l", "n", or "c" to indicate whether they are "liberal", "neutral", or "conservative".
+
+
+
+
+
+
+```{r Q1a}
+Int<- read.graph("as-22july06.gml",format=c("gml"))
+Pol<- read.graph("polblogs.gml",format=c("gml"))
+Neural<- read.graph("celegansneural.gml",format=c("gml"))
+book<-read.graph("polbooks.gml",format=c("gml"))
+
+```
+
+```{r Q1b}
+Internet<-Int
+Internet<- centr_degree(Internet, mode = "all")
+plot(Internet$res, xlab = 'Nodes',ylab = 'Degree Centrally')
+max(Internet$res)
+match(max(Internet$res), Internet$res)
+
+
+```
+
+```{r Q1c}
+
+Neuralnet<-Neural
+Neuralnet<- centr_degree(Neuralnet, mode = "all")
+plot(Neuralnet$res, xlab = 'Nodes',ylab = 'Degree Centrally')
+max(Neuralnet$res)
+match(max(Neuralnet$res), Neuralnet$res)
+
+```
+
+```{r Q1d}
+Political<-Pol
+Political<- centr_degree(Political, mode = "all")
+plot(Political$res, xlab = 'Nodes',ylab = 'Degree Centrally')
+max(Political$res)
+match(max(Political$res), Political$res)
+
+```
+
+
+```{r Q1e}
+books<-book
+books<- centr_degree(books, mode = "all")
+plot(books$res, xlab = 'Nodes',ylab = 'Degree Centrally')
+max(books$res)
+match(max(books$res), books$res)
+
+```
+
+```{r Q1f}
+Internet<-Int
+
+Internet_Eccentricity= eccentricity(Internet, vids = V(Internet), mode = c("all"))
+max(Internet_Eccentricity)
+match(max(Internet_Eccentricity), Internet_Eccentricity)
+
+
+```
+
+```{r Q1g}
+Neuralnet<-Neural
+Neuralnet_Eccentricity= eccentricity(Neuralnet, vids = V(Neuralnet), mode = c("all"))
+max(Neuralnet_Eccentricity)
+match(max(Neuralnet_Eccentricity), Neuralnet_Eccentricity)
+
+
+```
+
+```{r Q1h}
+Political<-Pol
+Political_Eccentricity= eccentricity(Political, vids = V(Political), mode = c("all"))
+max(Political_Eccentricity)
+match(max(Political_Eccentricity), Political_Eccentricity)
+
+
+```
+
+```{r Q1i}
+books<-book
+books_Eccentricity= eccentricity(books, vids = V(books), mode = c("all"))
+max(books_Eccentricity)
+match(max(books_Eccentricity), books_Eccentricity)
+```
+
+## Closeness
+
+```{r Q1j}
+
+Internet<- Int
+Internet_Closeness<- closeness(Internet, mode = c("all"))
+match(max(Internet_Closeness),Internet_Closeness)
+
+```
+
+```{r Q1k}
+Neuralnet<-Neural
+Neuralnet_Closeness<- closeness(Neuralnet, mode = c("all"))
+match(max(Neuralnet_Closeness),Neuralnet_Closeness)
+
+```
+
+
+```{r Q1l}
+Political<-Pol
+Political_Closeness<- closeness(Political, mode = c("all"))
+match(max(Political_Closeness),Political_Closeness)
+```
+
+```{r Q1m}
+books<-book
+books_Closeness<- closeness(books, mode = c("all"))
+match(max(books_Closeness),books_Closeness)
+
+```
+## Betweeness
+
+```{r Q1n}
+Internet<- Int
+Internet_Betweenness<- betweenness(Internet)
+match(max(Internet_Betweenness),Internet_Betweenness)
+
+```
+
+```{r Q1o}
+Neuralnet<-Neural
+Neuralnet_Betweenness<-betweenness(Neuralnet)
+match(max(Neuralnet_Betweenness),Neuralnet_Betweenness)
+```
+
+```{r Q1p}
+Political<-Pol
+Political_Betweenness<- betweenness(Political)
+match(max(Political_Betweenness),Political_Betweenness)
+```
+
+
+```{r Q1q}
+books<-book
+books_Betweenness<- betweenness(books)
+match(max(books_Betweenness),books_Betweenness)
+```
+
+## Page rank
+
+
+``` {r Q1r}
+Internet<- Int
+Internet_Page_rank<- page_rank(Internet)$vector
+match(max(Internet_Page_rank),Internet_Page_rank)
+
+```
+
+
+``` {r Q1s}
+Neuralnet<-Neural
+Neuralnet_Page_rank<-page_rank(Neuralnet)$vector
+match(max(Neuralnet_Page_rank),Neuralnet_Page_rank)
+
+```
+
+
+``` {r Q1t}
+Political<-Pol
+Political_Page_rank<-page_rank(Political)$vector
+match(max(Political_Page_rank),Political_Page_rank)
+
+```
+
+
+
+``` {r Q1u}
+books<-book
+books_Page_rank<-page_rank(books)$vector
+match(max(books_Page_rank),books_Page_rank)
+
+```
+
+## Kleinbergs Authority Score
+
+``` {r Q1v}
+Internet<- Int
+Internet_Authority_Score<- authority_score(Internet)$vector
+match(max(Internet_Authority_Score),Internet_Authority_Score)
+
+```
+
+
+
+``` {r Q1w}
+
+Neuralnet<-Neural
+Neuralnet_Authority_Score<- authority_score(Neuralnet)$vector
+match(max(Neuralnet_Authority_Score),Neuralnet_Authority_Score)
+```
+
+
+
+``` {r Q1x}
+Political<-Pol
+Political_Authority_Score<- authority_score(Political)$vector
+match(max(Political_Authority_Score),Political_Authority_Score)
+
+```
+
+``` {r Q1y}
+books<-book
+books_Authority_Score<- authority_score(books)$vector
+match(max(books_Authority_Score),books_Authority_Score)
+
+```
+## Kleinbergs Hub Score
+
+
+``` {r Q1z}
+library(centiserve)
+Internet<- Int
+Internet_hub_Score<-hub_score(Internet)$vector
+match(max(Internet_hub_Score),Internet_hub_Score)
+
+
+```
+
+
+``` {r Q1aa}
+Neuralnet<-Neural
+Neuralnet_hub_Score<-hub_score(Neuralnet)$vector
+match(max(Neuralnet_hub_Score),Neuralnet_hub_Score)
+
+```
+
+``` {r Q1bb}
+Political<-Pol
+Political_hub_Score<-hub_score(Political)$vector
+match(max(Political_hub_Score),Political_hub_Score)
+
+
+```
+
+
+``` {r Q1cc}
+
+books<-book
+books_hub_Score<-hub_score(books)$vector
+match(max(books_hub_Score),books_hub_Score)
+
+```
+## Discussion related to results:
+
+Some Nodes have more value than the others in every graph. We can identify this from different centrality measures giving same Nodes repeatedly. In Internet, Node 4 had the maximum value in terms of Degree, Page Rank, Betweeness, Kleinburg hub, Klienburg Authority centrality measures. Node 45 and 855  in Neural Network and Political graph respectively.
+
+
+## Problem 2:
+
+
+``` {r Q2a}
+erd1 <- erdos.renyi.game(n = 20, p = 0.0501, type = c("gnp"), directed = TRUE)
+gsize(erd1)
+vcount(erd1)
+
+
+erd2 <- barabasi.game(n = 20, power = 1, m = NULL, directed = TRUE) 
+gsize(erd2)
+vcount(erd2)
+
+erd3 <- erdos.renyi.game(n = 40, p = 0.03, type = c("gnp"), directed = TRUE)
+gsize(erd3)
+vcount(erd3)
+
+erd4 <- barabasi.game(n = 40, power = 1, m = NULL, directed = TRUE) 
+gsize(erd4)
+vcount(erd4)
+
+par(mfrow=c(1,2))
+plot(erd1, vertex.label= NA, edge.arrow.size=0.1, vertex.size = 5, xlab = "Erdos Renyi graph with 20 nodes")
+plot(erd2, vertex.label= NA, edge.arrow.size=0.1, vertex.size = 5, xlab = "Barabasi graph with 20 nodes")
+par(mfrow=c(1,2))
+plot(erd3, vertex.label= NA, edge.arrow.size=0.1, vertex.size = 5, xlab = "Erdos Renyi graph with 40 nodes")
+plot(erd4, vertex.label= NA, edge.arrow.size=0.1, vertex.size = 5, xlab = "Barabasi graph with 40 nodes")
+
+```
+
+```{r Q2b}
+min(degree(erd1))
+min(degree(erd2))
+min(degree(erd3))
+min(degree(erd4))
+
+```
+
+```{r Q2bb}
+
+max(degree(erd1))
+max(degree(erd2))
+max(degree(erd3))
+max(degree(erd4))
+
+```
+
+```{r Q2c}
+
+average.path.length(erd1)
+average.path.length(erd2)
+average.path.length(erd3)
+average.path.length(erd4)
+```
+
+```{r Q2z}
+
+transitivity(graph = erd1, type = c("global"))
+transitivity(graph = erd2, type = c("global"))
+transitivity(graph = erd3, type = c("global"))
+transitivity(graph = erd4, type = c("global"))
+
+```
+
+```{r Q2d}
+diameter(erd1)
+diameter(erd2)
+diameter(erd3)
+diameter(erd4)
+
+
+```
+```{r Q2zz}
+
+Total<-E(erd1, P=NULL, path=NULL, directed=TRUE)
+Total
+Total<-E(erd2, P=NULL, path=NULL, directed=TRUE)
+Total
+Total<-E(erd3, P=NULL, path=NULL, directed=TRUE)
+Total
+Total<-E(erd4, P=NULL, path=NULL, directed=TRUE)
+Total
+
+```
+```{r Q2e}
+
+lap1 <- laplacian_matrix(erd1, normalized = FALSE)
+E1 <- eigen(lap1)
+e_value1 <- E1$values
+e_vectors1 <- E1$vectors
+View(e_value1)
+
+lap2 <- laplacian_matrix(erd2, normalized = FALSE)
+E2 <- eigen(lap2)
+e_value2 <- E2$values
+e_vectors2 <- E2$vectors
+
+lap4 <- laplacian_matrix(erd4, normalized = FALSE)
+E4 <- eigen(lap4)
+e_value4 <- E4$values
+e_vectors4 <- E4$vectors
+
+lap3 <- laplacian_matrix(erd3, normalized = FALSE)
+E3 <- eigen(lap3)
+e_value3 <- E3$values
+e_vectors3 <- E3$vectors
+
+```
+
+
+
+```{r Q2f}
+
+
+max(abs(e_value1))
+
+abs(sort(e_value1, decreasing=F)[2])
+
+
+max(abs(e_value2))
+abs(sort(e_value2, decreasing=F)[2])
+
+
+max(abs(e_value3))
+abs(sort(e_value3, decreasing=F)[2])
+
+max(abs(e_value4))
+abs(sort(e_value4, decreasing=F)[2])
+
+```
+
+```{r Q2g}
+
+
+data_frame1 <-  data.frame(x = c(1:20),  
+SecondEigenVaue = eigen(graph.laplacian(erd1))$vectors[,19],
+LargestValue = eigen(graph.laplacian(erd1))$vectors[,which.max(eigen(graph.laplacian(erd1))$values)] )
+
+
+data_frame2 = data.frame(x = c(1:20), 
+SecondEigenVaue = eigen(graph.laplacian(erd2))$vectors[,19], 
+LargestValue = eigen(graph.laplacian(erd2))$vectors[,which.max(eigen(graph.laplacian(erd2))$values)])
+```
+
+
+```{r Q2gg}
+library(ggplot2)
+
+ggplot(data_frame1, aes(x = x)) +
+  geom_line(aes(y = SecondEigenVaue, colour = "Second smaller")) +
+  geom_line(aes(y = LargestValue, colour="Largest value")) +
+  xlab("Vertex id") +
+  ylab("Eigen vector value")+
+  scale_colour_manual("",breaks = c("Second smaller", "Largest value"),
+                      values = c("blue", "orange")) 
+  
+
+ggplot(data_frame2, aes(x = x)) +
+  geom_line(aes(y = SecondEigenVaue, colour = "Second smaller")) +
+  geom_line(aes(y = LargestValue, colour="Largest value")) +
+  xlab("Vertex id") +
+  ylab("Eigen vector value") +
+  scale_colour_manual("", breaks = c("Second smaller", "Largest value"),
+  values = c("blue", "orange")) 
+
+
+
+```
+
+## Problem 3
+
+## PageRank Application:
+
+PageRank for MonitorRank for debugging: 
+
+The use of debugging in large complex systems is a dream of production engineers. In this article, the authors have described how products act as a node in directed graphs in which the directions of the graph represent the functionality. A weighted call used by Pagerank will iterate through the system whenever a problem is detected in system. It then returns a ranked list of systems on the basis of how likely each system contributed to the problem. This would reduce the time to solve a problem.
+
+Pagerank in literature: 
+
+Pagerank is also used to identify which books are important. It also helps in analyzing story paths and recommendations of books. PageRank is used to evaluate the content of historic authors and content of present to analyze the whose content was more authentic by comparing it with others. It also evaluates the possibilities of multiple story paths for a given novel and so resulting in betters chances of a user liking a book. The system connects the most suitable novel based on readers characteristics 
+
+Pagerank in NeuroScience: 
+
+Pagerank is used to understand the most important parts of the brain is truly amazing. It is used with MRI scans to review correlations between their functional time series in order to evaluate the different parts of the brain which got affected with time is truly amazing. Given all these reasons i think of PageRank  
+as algorithm which is limited use search engines.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
